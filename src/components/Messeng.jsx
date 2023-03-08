@@ -1,4 +1,5 @@
 import { useState } from "react";
+import arrow from "../img/arrow.png";
 
 function Messeng() {
   const [messeng, setMesseng] = useState([
@@ -34,6 +35,34 @@ function Messeng() {
     },
   ]);
 
+  const hendlerLeftSide = (id) => {
+    setMesseng((prevMesseg) => {
+      return prevMesseg.map((msg) => {
+        if (msg.id === id) {
+          return {
+            ...msg,
+            side: msg.side === "left" ? "right" : "left",
+          };
+        }
+        return msg;
+      });
+    });
+  };
+
+  const hendlerRight = (id) => {
+    setMesseng((prevMessege) => {
+      return prevMessege.map((msge) => {
+        if (msge.id === id) {
+          return {
+            ...msge,
+            side: msge.side === "right" ? "left" : "right",
+          };
+        }
+        return msge;
+      });
+    });
+  };
+
   const handlerRemove = (id) => {
     setMesseng(
       messeng.filter((item) => {
@@ -68,6 +97,20 @@ function Messeng() {
                 >
                   X
                 </button>
+
+                <img
+                  src={arrow}
+                  alt=''
+                  className='left'
+                  onClick={() => hendlerLeftSide(item.id)}
+                />
+
+                <img
+                  src={arrow}
+                  alt=''
+                  className='right'
+                  onClick={() => hendlerRight(item.id)}
+                />
               </div>
             </div>
           </div>
